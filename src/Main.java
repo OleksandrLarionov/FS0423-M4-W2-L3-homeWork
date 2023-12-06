@@ -1,9 +1,10 @@
 import entities.Category;
 import entities.Product;
 
+import java.util.List;
 import java.util.function.Predicate;
 
-import static entities.Category.Books;
+import static entities.Category.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,15 +14,35 @@ public class Main {
         Product bookThree = new Product("Spiderman", Books, 23.99);
         Product baby = new Product("Pannolone",Category.Baby, 14.50);
         Product boys = new Product("Lego", Category.Boys, 500.99);
+        Product bookthree = new Product("Principessa", Books, 100.99);
+
 
         Product.order.add(bookOne);
         Product.order.add(baby);
         Product.order.add(bookThree);
         Product.order.add(boys);
+        Product.order.add(bookthree);
 
 
+
+        System.out.println("****************Books*********************");
         Predicate<Product> product = category -> category.getCategory() == Books;
+
+        List<Product> books = Product.order.stream().filter(product).toList();
+        books.stream().filter(books2 -> books2.getPrice() > 100).forEach(System.out::println);
+
+        System.out.println("****************Baby*********************");
+
+        Predicate<Product> product2 = category -> category.getCategory() == Baby;
+
+        List<Product> babyProducts = Product.order.stream().filter(product2).toList();
+        System.out.println(babyProducts);
+
+        System.out.println("****************Baby*********************");
+
+        Predicate<Product> product3 = category -> category.getCategory() == Boys;
         
-        Product.order.stream().filter(product).forEach(book -> System.out.println(book.getPrice()));
+        List<Product> boys = Product.order.stream().filter(product3).toList();
+
     }
 }
