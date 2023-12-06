@@ -12,7 +12,7 @@ public class Main {
         Product bookOne = new Product("Signore degli annelli", Books, 15.99);
         Product bookTwo = new Product("Batman il Cavaliere oscuro", Books, 9.99);
         Product bookThree = new Product("Spiderman", Books, 23.99);
-        Product baby = new Product("Pannolone",Category.Baby, 14.50);
+        Product baby = new Product("Pannolone", Category.Baby, 14.50);
         Product boys = new Product("Lego", Category.Boys, 500.99);
         Product bookthree = new Product("Principessa", Books, 100.99);
 
@@ -24,12 +24,15 @@ public class Main {
         Product.order.add(bookthree);
 
 
-
         System.out.println("****************Books*********************");
-        Predicate<Product> product = category -> category.getCategory() == Books;
+//        Predicate<Product> product = category -> category.getCategory() == Books;
+//
+//        List<Product> books = Product.order.stream().filter(product).toList();
+//        books.stream().filter(books2 -> books2.getPrice() > 100).forEach(System.out::println);
 
-        List<Product> books = Product.order.stream().filter(product).toList();
-        books.stream().filter(books2 -> books2.getPrice() > 100).forEach(System.out::println);
+        //**********************metodo 2******************
+        List<Product> books = Product.order.stream().filter(product -> product.getCategory() == Books && product.getPrice() > 100).toList();
+        System.out.println(books);
 
         System.out.println("****************Baby*********************");
 
@@ -38,11 +41,15 @@ public class Main {
         List<Product> babyProducts = Product.order.stream().filter(product2).toList();
         System.out.println(babyProducts);
 
-        System.out.println("****************Baby*********************");
+        System.out.println("****************Boys*********************");
 
         Predicate<Product> product3 = category -> category.getCategory() == Boys;
-        
-        List<Product> boys = Product.order.stream().filter(product3).toList();
+
+        List<Product> boysProduct = Product.order.stream().filter(product3).toList();
+        boysProduct.stream().map(productBoys -> {
+            productBoys.setPrice(productBoys.getPrice() * 0.90);
+            return productBoys;
+        }).forEach(System.out::println);
 
     }
 }

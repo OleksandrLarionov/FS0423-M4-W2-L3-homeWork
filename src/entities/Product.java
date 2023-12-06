@@ -47,6 +47,16 @@ public class Product {
         return rndm.nextLong();
     }
 
+//    public List<Product> addProduct (List<Product> p){
+//        order.add(p);
+//
+//    }
+
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
